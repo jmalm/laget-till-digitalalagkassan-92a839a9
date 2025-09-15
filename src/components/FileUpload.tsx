@@ -136,8 +136,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcessed }) => {
         while (j < data.length && data[j].Roll !== 'Aktiv' && guardianCount < 2) {
           const guardianRow = data[j];
           
-          // Only process parents/guardians (skip coaches/leaders)
-          if (guardianRow.Roll === 'Förälder') {
+          // Include anyone with contact info who isn't a player (could be Förälder, Ledare, etc.)
+          if (guardianRow.Roll !== 'Aktiv' && (guardianRow.Namn || guardianRow['E-post (primär)'] || guardianRow.Mobiltelefon)) {
             guardianCount++;
             
             if (guardianCount === 1) {
