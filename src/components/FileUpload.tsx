@@ -109,17 +109,55 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcessed }) => {
     }
   }, [onFileProcessed, toast]);
 
-  // Placeholder transformation function - needs to be implemented based on actual formats
+  // Transform laget.se format to Digitala Lagkassan format
   const transformData = (data: any[]): any[] => {
-    // This would contain the actual mapping logic from laget.se format to digitala lagkassan format
-    return data.map(row => ({
-      // Example transformation - replace with actual field mappings
-      namn: row.namn || row.name || '',
-      personnummer: row.personnummer || row.ssn || '',
-      telefon: row.telefon || row.phone || '',
-      epost: row.epost || row.email || '',
-      // Add more field mappings as needed
-    }));
+    const result: any[] = [];
+    
+    for (let i = 0; i < data.length; i++) {
+      const row = data[i];
+      
+      // Check if this row is a player (Aktiv)
+      if (row.Roll === 'Aktiv') {
+        const playerData: any = {
+          'Aktiv': row.Namn || '',
+          'Vårdnadshavare1': '',
+          'E-post1': '',
+          'Mobilnummer1': '',
+          'Vårdnadshavare2': '',
+          'E-post2': '',
+          'Mobilnummer2': ''
+        };
+        
+        // Look for guardians following this player
+        let guardianCount = 0;
+        let j = i + 1;
+        
+        // Continue until we find the next player or reach end of data
+        while (j < data.length && data[j].Roll !== 'Aktiv' && guardianCount < 2) {
+          const guardianRow = data[j];
+          
+          // Only process parents/guardians (skip coaches/leaders)
+          if (guardianRow.Roll === 'Förälder') {
+            guardianCount++;
+            
+            if (guardianCount === 1) {
+              playerData['Vårdnadshavare1'] = guardianRow.Namn || '';
+              playerData['E-post1'] = guardianRow['E-post (primär)'] || '';
+              playerData['Mobilnummer1'] = guardianRow.Mobiltelefon || '';
+            } else if (guardianCount === 2) {
+              playerData['Vårdnadshavare2'] = guardianRow.Namn || '';
+              playerData['E-post2'] = guardianRow['E-post (primär)'] || '';
+              playerData['Mobilnummer2'] = guardianRow.Mobiltelefon || '';
+            }
+          }
+          j++;
+        }
+        
+        result.push(playerData);
+      }
+    }
+    
+    return result;
   };
 
   const handleDragOver = (e: React.DragEvent) => {
