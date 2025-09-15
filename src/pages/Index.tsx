@@ -100,15 +100,19 @@ const Index = () => {
                 <ol className="space-y-2 text-muted-foreground">
                   <li className="flex items-start space-x-2">
                     <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                    <span>Logga in på laget.se</span>
+                    <span>Gå till laget.se → Admin för ditt lag → Medlemmar → Adresslista</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                    <span>Gå till medlemmar/spelare</span>
+                    <span>Markera följande medlemsroller: Aktiv, Förälder</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                    <span>Exportera till Excel-format</span>
+                    <span>Markera följande information: Namn, E-post (primär), Mobiltelefon</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
+                    <span>Klicka på Exportera</span>
                   </li>
                 </ol>
               </div>
@@ -122,11 +126,15 @@ const Index = () => {
                   </li>
                   <li className="flex items-start space-x-2">
                     <span className="bg-accent text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                    <span>Vänta på konvertering</span>
+                    <span>Ladda ned den konverterade filen</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <span className="bg-accent text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                    <span>Ladda ner och importera i Lagkassan</span>
+                    <span>Gå till Digitala lagkassan → Inställningar → Hantera användare → Importera</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="bg-accent text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
+                    <span>Ladda upp den konverterade filen</span>
                   </li>
                 </ol>
               </div>
